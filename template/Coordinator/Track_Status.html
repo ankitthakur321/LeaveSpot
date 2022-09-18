@@ -1,0 +1,182 @@
+{% load static %}
+{% if user.is_authenticated %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title> Status Tracking | LeaveSpot</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+	 <!-- Vendor CSS Files -->
+	  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/nivo-slider/css/nivo-slider.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+
+	  <!-- Template Main CSS File -->
+	  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <link rel="icon" href="{% static 'assets/img/favicon1.png' %}">
+
+</head>
+<body>
+	<!-- ======= Header ======= -->
+	  <header id="header" class="fixed-top">
+	    <div class="container d-flex">
+
+	     <div class="logo mr-auto">
+          <!--<h1 class="text-light"><a href="index.php">Leave&nbsp;<span>Spot</span></a></h1>-->
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <a href="{% url 'Logout' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid"></a>
+         </div>
+
+	      <nav class="nav-menu d-none d-lg-block">
+	        <ul>
+	          <li class="active"><a href="{% url 'coordinatorPortal' %}">Home</a></li>
+	          <li><a href="{% url 'Logout' %}">Logout</a></li>
+	        </ul>
+	      </nav><!-- .nav-menu -->
+
+	    </div>
+	  </header><!-- End Header -->
+
+    <!--Body Content-->
+      <div class="container"style="margin-top: 100px;">
+       <div class="table-responsive" style="align-items: center;">
+                <table class="table table-bordered" id="dataTable" style="text-align:center;" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Registration No</th>
+                      <th>Name</th>
+                      <th>No. of Leaves</th>
+                      <th>Reason</th>
+                      <th>Dated</th>
+                      <th>Documents Required</th>
+                      <th>Status</th>
+                      <th>Submitted Documents</th>
+                    </tr>
+                  </thead>
+                  {% block content %}
+                  {% for data in studentLeaveData %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.Name }}</td>
+                    <td>{{ data.No_of_Leaves }}</td>
+                    <td>{{ data.Reason }}</td>
+                    <td>{{ data.Dated }}</td>
+                    <td>{{ data.Doc_Req }}</td>
+                    <td>{{ data.Status }}</td>
+                    {% if data.Doc_Req == "Yes" %}
+                      <td><a href="../../static/upload/{{ data.id }}_{{ data.Dated }}.docx" download>Download</a></td>
+                    {% else %}
+                      <td>N/A</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                  {% endblock %}
+                </table>
+              </div>
+            </div>
+        <!--  Body Content Ends -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area" style="margin-top:280px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+	        		     <img style="margin-left: -20px;height:60px;" src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-10">
+                  <p>About LeaveSpot</p>
+                  <p> LeaveSpot is an online portal for applying and tracking leaves for students and tracking leave status and approving and rejecting leave for coordinators.</p>
+                </div>
+                <div class="footer-icons ml-3">
+                  <ul>
+                    <li>
+                      <a href="https://www.facebook.com/imankit.official/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/in/ankit-kumar-41a815175/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.instagram.com/imankit_official/" target="_blank"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/tAnkit5210" target="_blank"><i class="fa fa-twitter"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Contact</h4>
+                <div class="footer-contacts">
+                  <p><span>Contact No.:</span> +91 8292766864</p>
+                  <p><span>Email:</span> tankit5210@gmail.com</p>
+                  <p><span>Working Hours:</span> 10am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+         <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4></h4>
+                 <div class="copyright text-center">
+              <p>
+                &copy; <strong>LeaveSpot</strong> <script>document.write(new Date().getFullYear());</script> <br />
+              </p>
+            </div>
+            <div class="credits">
+              Designed with 💝 by <a href="https://tankit5210.wixsite.com/my-folio" target="_blank">Ankit Kumar</a>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	  <!-- Vendor JS Files -->
+		  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+		  <script src="{% static 'assets/vendor/appear/jquery.appear.js' %}"></script>
+		  <script src="{% static 'assets/vendor/knob/jquery.knob.js' %}"></script>
+		  <script src="{% static 'assets/vendor/parallax/parallax.js' %}"></script>
+		  <script src="{% static 'assets/vendor/wow/wow.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/nivo-slider/js/jquery.nivo.slider.js' %}"></script>
+		  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+
+		  <!-- Template Main JS File -->
+		  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>
+
+{% else %}
+<script>alert("You have been logged out.");
+  window.location.href="{% url 'CoordinatorLogin' %}";
+</script>
+{% endif %}

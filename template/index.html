@@ -1,0 +1,196 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+	<title>LeaveSpot | The Right Spot at the Right Time</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+	<link rel="icon" href="{% static 'assets/img/favicon1.png' %}">
+
+	 <!-- Vendor CSS Files -->
+	  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/nivo-slider/css/nivo-slider.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+
+	  <!-- Template Main CSS File -->
+	  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+	<!-- ======= Header ======= -->
+	  <header id="header" class="fixed-top">
+	    <div class="container d-flex">
+
+	      <div class="logo mr-auto">
+	         <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid"></a>
+	      </div>
+
+	      <nav class="nav-menu d-none d-lg-block">
+	        <ul>
+	          <li class="active"><a href="{% url 'index' %}">Home</a></li>
+	          <li class="drop-down"><a href="">Login</a>
+	            <ul>
+	              <li><a href="{% url 'StudentLogin' %}">Student Login</a></li>
+	              <li><a href="{% url 'CoordinatorLogin' %}">Coordinator Login</a></li>
+	            </ul>
+	          </li>
+	        </ul>
+	      </nav><!-- .nav-menu -->
+
+	    </div>
+	  </header><!-- End Header -->
+
+ <!-- ======= Slider Section ======= -->
+  <div id="home" class="slider-area">
+    <div class="bend niceties preview-2">
+      <div id="ensign-nivoslider" class="slides">
+        <img src="{% static 'assets/img/slider/Students.jpg' %}" alt="" title="#slider-direction-1" />
+        <img src="{% static 'assets/img/slider/Coordinator.jpg' %}" alt="" title="#slider-direction-2" />
+      </div>
+
+      <!-- direction 1 -->
+      <div id="slider-direction-1" class="slider-direction slider-one">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="slider-content">
+                <!-- layer 1 -->
+                <div class="layer-1-1 hidden-xs wow animate__slideInDown animate__animated" data-wow-duration="2s" data-wow-delay=".2s">
+                  <h2 class="title1"> The Right Spot At The Right Time.</h2>
+                </div>
+                <!-- layer 2 -->
+                <div class="layer-1-2 wow animate__fadeIn animate__animated" data-wow-duration="2s" data-wow-delay=".2s">
+                  <h1 class="title2">Leave Application for Students</h1>
+                </div>
+                <!-- layer 3 -->
+                <div class="layer-1-3 hidden-xs wow animate__slideInUp animate__animated" data-wow-duration="2s" data-wow-delay=".2s">
+                  <a class="ready-btn right-btn" href="{% url 'StudentLogin' %}">Login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- direction 2 -->
+      <div id="slider-direction-2" class="slider-direction slider-two">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="slider-content text-center">
+                <!-- layer 1 -->
+                <div class="layer-1-1 hidden-xs wow animate__slideInUp animate__animated" data-wow-duration="2s" data-wow-delay=".2s">
+                  <h2 class="title1">The Right Spot At The Right Time.</h2>
+                </div>
+                <!-- layer 2 -->
+                <div class="layer-1-2 wow animate__fadeIn animate__animated" data-wow-duration="2s" data-wow-delay=".1s">
+                  <h1 class="title2">Application Approval for Coordinators</h1>
+                </div>
+                <!-- layer 3 -->
+                <div class="layer-1-3 hidden-xs wow animate__slideInUp animate__animated" data-wow-duration="2s" data-wow-delay=".2s">
+                  <a class="ready-btn right-btn" href="{% url 'CoordinatorLogin' %}">Login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div><!-- End Slider -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+	        		     <img style="margin-left: -20px;height:60px;" src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-10">
+                  <p>About LeaveSpot</p>
+                  <p> LeaveSpot is an online portal for applying and tracking leaves for students and tracking leave status and approving and rejecting leave for coordinators.</p>
+                </div>
+                <div class="footer-icons ml-3">
+                  <ul>
+                    <li>
+                      <a href="https://www.facebook.com/imankit.official/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/in/ankit-kumar-41a815175/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.instagram.com/imankit_official/" target="_blank"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/tAnkit5210" target="_blank"><i class="fa fa-twitter"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Contact</h4>
+                <div class="footer-contacts">
+                  <p><span>Contact No.:</span> +91 8292766864</p>
+                  <p><span>Email:</span> tankit5210@gmail.com</p>
+                  <p><span>Working Hours:</span> 10am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+         <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4></h4>
+                 <div class="copyright text-center">
+              <p>
+                &copy; <strong>LeaveSpot</strong> <script>document.write(new Date().getFullYear());</script>
+              </p>
+            </div>
+            <div class="credits">
+              Designed with 💝 by <a href="https://tankit5210.wixsite.com/my-folio" target="_blank">Ankit Kumar</a>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+	  <!-- Vendor JS Files -->
+		  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+		  <script src="{% static 'assets/vendor/appear/jquery.appear.js' %}"></script>
+		  <script src="{% static 'assets/vendor/knob/jquery.knob.js' %}"></script>
+		  <script src="{% static 'assets/vendor/parallax/parallax.js' %}"></script>
+		  <script src="{% static 'assets/vendor/wow/wow.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/nivo-slider/js/jquery.nivo.slider.js' %}"></script>
+		  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+
+		  <!-- Template Main JS File -->
+		  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

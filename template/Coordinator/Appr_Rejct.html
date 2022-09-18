@@ -1,0 +1,323 @@
+{% load static %}
+{% if user.is_authenticated %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title> Application Action | LeaveSpot</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+	 <!-- Vendor CSS Files -->
+	  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/nivo-slider/css/nivo-slider.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+
+	  <!-- Template Main CSS File -->
+	  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'assets/img/favicon1.png' %}">
+    
+    <style type="text/css">
+      nav > .nav.nav-tabs{
+
+            border: none;
+              color:#fff;
+              background:#272e38;
+              border-radius:0;
+
+          }
+          nav > div a.nav-item.nav-link
+          
+          {
+            border: none;
+              padding: 18px 25px;
+              color:#fff;
+              background:#272e38;
+              border-radius:0;
+          }
+          nav > div a.nav-item.nav-link.active{
+            border: none;
+              padding: 18px 25px;
+              color:#fff;
+              background:#e74c3c;
+              border-radius:0;
+          }
+
+          nav > div a.nav-item.nav-link.active:after
+          {
+            content: "";
+            position: relative;
+            bottom: -60px;
+            left: -30%;
+            border: 15px solid transparent;
+            border-top-color: #e74c3c;
+          }
+          .tab-content{
+            background: #fdfdfd;
+              line-height: 25px;
+              border: 1px solid #ddd;
+              border-top:5px solid #e74c3c;
+              border-bottom:5px solid #e74c3c;
+              padding:30px 25px;
+          }
+
+          nav > div a.nav-item.nav-link:hover,
+          nav > div a.nav-item.nav-link:focus
+          {
+            border: none;
+              background: #e74c3c;
+              color:#fff;
+              border-radius:0;
+              transition:background 0.20s linear;
+          }
+    </style>
+
+</head>
+<body>
+	<!-- ======= Header ======= -->
+	  <header id="header" class="fixed-top">
+	    <div class="container d-flex">
+
+	       <div class="logo mr-auto">
+          <a href="{% url 'Logout' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid"></a>
+         </div>
+
+	      <nav class="nav-menu d-none d-lg-block">
+	        <ul>
+	          <li class="active"><a href="{% url 'coordinatorPortal' %}">Home</a></li>
+	          <li><a href="{% url 'Logout' %}">Logout</a></li>
+	        </ul>
+	      </nav><!-- .nav-menu -->
+
+	    </div>
+	  </header><!-- End Header -->
+
+    <!--Body Content-->
+    
+    <div class="container" style="margin-top: 100px;">
+              {% if messages %}
+                {% for message in messages %}
+                  <h4 class="text-success">{{message}}</h4>
+                {% endfor %}
+             	{% endif %}
+              <div class="row justify-content-center">
+                <div class="col-xs-12">
+                  <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#Pending" role="tab" aria-controls="nav-home" aria-selected="true">Pending Requests</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#Approved" role="tab" aria-controls="nav-profile" aria-selected="false">Approved Requests</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#Rejected" role="tab" aria-controls="nav-profile" aria-selected="false">Rejected Requests</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="Pending" role="tabpanel" aria-labelledby="nav-home-tab">
+                      <div class="table-responsive text-center">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="bg-primary">
+                              <tr>
+                                <th>Registration No</th>
+                                <th>Name</th>
+                                <th>No. of Leaves</th>
+                                <th>Reason</th>
+                                <th>Dated</th>
+                                <th>Documents Required</th>
+                                <th>Status</th>
+                                <th>Approve/Reject</th>
+                              </tr>
+                            </thead>
+                            {% for data in studentLeavePending %}
+                            <tr>
+                              <td>{{ data.id }}</td>
+                              <td>{{ data.Name }}</td>
+                              <td>{{ data.No_of_Leaves }}</td>
+                              <td>{{ data.Reason }}</td>
+                              <td>{{ data.Dated }}</td>
+                              <td>{{ data.Doc_Req }}</td>
+                              <td>{{ data.Status }}</td>
+                              <td>
+                                <div style="display: inline-flex;">
+                                      <form class="form-inline" action="{% url 'ApproveLeave' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="Id" value="{{ data.id }}" >
+                                        <input type="hidden" name="Dated" value="{{ data.Dated }}" >
+                                        <input type="submit" class="btn-sm btn-success btn-block shadow-sm" name="ApproveBtn" value="Approve">
+                                      </form>&nbsp;&nbsp;&nbsp;<p style="font-size: 40px;margin-top: 10px;">/</p>&nbsp;&nbsp;&nbsp;
+                    
+                                      <form class="form-inline " action="{% url 'RejectLeave' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="Id" value="{{ data.id }}" >
+                                        <input type="hidden" name="Dated" value="{{ data.Dated }}" >
+                                        <input type="submit" class="btn-sm btn-danger btn-block shadow-sm" name="RejectBtn" value="Reject">
+                                      </form>
+                                    </div>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Approved" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="table-responsive text-center">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="bg-success">
+                              <tr>
+                                <th>Registration No</th>
+                                <th>Name</th>
+                                <th>No. of Leaves</th>
+                                <th>Reason</th>
+                                <th>Dated</th>
+                                <th>Documets Required</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            {% for data in studentLeaveApproved %}
+                            <tr>
+                              <td>{{ data.id }}</td>
+                              <td>{{ data.Name }}</td>
+                              <td>{{ data.No_of_Leaves }}</td>
+                              <td>{{ data.Reason }}</td>
+                              <td>{{ data.Dated }}</td>
+                              <td>{{ data.Doc_Req }}</td>
+                              <td>{{ data.Status }}</td>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="tab-pane fade" id="Rejected" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="table-responsive text-center">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="bg-danger">
+                              <tr>
+                                <th>Registration No</th>
+                                <th>Name</th>
+                                <th>No. of Leaves</th>
+                                <th>Reason</th>
+                                <th>Dated</th>
+                                <th>Documets Required</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            {% for data in studentLeaveRejected %}
+                            <tr>
+                              <td>{{ data.id }}</td>
+                              <td>{{ data.Name }}</td>
+                              <td>{{ data.No_of_Leaves }}</td>
+                              <td>{{ data.Reason }}</td>
+                              <td>{{ data.Dated }}</td>
+                              <td>{{ data.Doc_Req }}</td>
+                              <td>{{ data.Status }}</td>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                        </div>
+                      </div>
+                    
+                
+                </div>
+              </div>
+        </div>
+      </div>    
+        <!--  Body Content Ends -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area" style="margin-top:230px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+	        		     <img style="margin-left: -20px;height:60px;" src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-10">
+                  <p>About LeaveSpot</p>
+                  <p> LeaveSpot is an online portal for applying and tracking leaves for students and tracking leave status and approving and rejecting leave for coordinators.</p>
+                </div>
+                <div class="footer-icons ml-3">
+                  <ul>
+                    <li>
+                      <a href="https://www.facebook.com/imankit.official/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/in/ankit-kumar-41a815175/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.instagram.com/imankit_official/" target="_blank"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/tAnkit5210" target="_blank"><i class="fa fa-twitter"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Contact</h4>
+                <div class="footer-contacts">
+                  <p><span>Contact No.:</span> +91 8292766864</p>
+                  <p><span>Email:</span> tankit5210@gmail.com</p>
+                  <p><span>Working Hours:</span> 10am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+         <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4></h4>
+                 <div class="copyright text-center">
+              <p>
+                &copy; <strong>LeaveSpot</strong> <script>document.write(new Date().getFullYear());</script> <br />
+              </p>
+            </div>
+            <div class="credits">
+              Designed with 💝 by <a href="https://tankit5210.wixsite.com/my-folio" target="_blank">Ankit Kumar</a>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	  <!-- Vendor JS Files -->
+		  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+		  <script src="{% static 'assets/vendor/appear/jquery.appear.js' %}"></script>
+		  <script src="{% static 'assets/vendor/knob/jquery.knob.js' %}"></script>
+		  <script src="{% static 'assets/vendor/parallax/parallax.js' %}"></script>
+		  <script src="{% static 'assets/vendor/wow/wow.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/nivo-slider/js/jquery.nivo.slider.js' %}"></script>
+		  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+
+		  <!-- Template Main JS File -->
+		  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>
+
+{% else %}
+<script>alert("You have been logged out.");
+  window.location.href="{% url 'CoordinatorLogin' %}";
+</script>
+{% endif %}

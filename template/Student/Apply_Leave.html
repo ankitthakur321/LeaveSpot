@@ -1,0 +1,269 @@
+{% load static %}
+{% if user.is_authenticated %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Apply Leave | LeaveSpot</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" href="{% static 'assets/img/favicon1.png' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Apply_Leave/css/main.css' %}">
+<!--===============================================================================================-->
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+	 <!-- Vendor CSS Files -->
+	  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/nivo-slider/css/nivo-slider.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+	  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+
+	  <!-- Template Main CSS File -->
+	  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+<body style="background-color: #999999;" onload= "document.getElementById('DocReq').style.visibility = 'hidden';">
+
+	<!-- ======= Header ======= -->
+	  <header id="header" class="fixed-top">
+	    <div class="container d-flex">
+
+	     <div class="logo mr-auto">
+	         <a href="{% url 'Logout' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid"></a>
+	      </div>
+
+	     <nav class="nav-menu d-none d-lg-block">
+	        <ul>
+	          <li class="active"><a href="{% url 'studentPortal' %}">Home</a></li>
+	          <li><a href="{% url 'Logout' %}">Logout</a></li>
+	        </ul>
+	      </nav><!-- .nav-menu -->
+
+	    </div>
+	  </header><!-- End Header -->
+
+
+    <!-- =====Body Content===== -->
+
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="login100-more" style="background-image: url( '../../static/Apply_Leave/images/bg-01.jpg' );"></div>
+
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+				{% if messages %}
+                {% for message in messages %}
+                  <h4 class="text-success">{{message}}</h4>
+                {% endfor %}
+             	{% endif %}
+				<form class="login100-form validate-form" action="{% url 'leaveApplication' %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					
+					<span class="login100-form-title p-b-59">
+						Apply Leave
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Name is required">
+						<span class="label-input100">Name</span>
+						<input class="input100" type="text" name="Name" placeholder="Name...">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Course is required">
+						<span class="label-input100">Course</span>
+						<input class="input100" type="text" name="Course" placeholder="Course...">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Semester is required">
+						<span class="label-input100">Semester</span>
+						<input class="input100" type="text" name="Semester" placeholder="Semester...">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Section is required">
+						<span class="label-input100">Section</span>
+						<input class="input100" type="text" name="Section" placeholder="Section...">
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input" data-validate="Registration No. is required">
+						<span class="label-input100">Registration No.</span>
+						<input class="input100" type="text" name="Id" placeholder="Registration No...">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "No. of Leaves is required">
+						<span class="label-input100">No. of Leaves</span>
+						<input class="input100" type="text" name="No_of_Leaves" placeholder="No. of Leaves...">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Reason is required">
+						<span class="label-input100">Reason</span>
+						<input class="input100" type="text" name="Reason" placeholder="Reason">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Date is required">
+						<span class="label-input100">Date</span>
+						<input class="input100" type="date" name="Dated">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Please Choose Yes/No for Documents">
+						<span class="label-input100">Document Required</span><br /><br />
+						<a href="{% url 'fileupload' %}" target="_blank">
+						<input type="radio" id = "rdbYes" name="rdbYes" onclick="document.getElementById('Doc_Req').value = 'Yes';document.getElementById('Doc_Req').style.visibility = 'hidden';" value="Yes">  <span class="label-input90">Yes</span></a>
+						<input style="margin-left:50px;" type="radio" id = "rdbNo" name="rdbNo" onclick = "document.getElementById('Doc_Req').value = 'No';document.getElementById('Doc_Req').style.visibility = 'hidden';" >  <span class="label-input90">No</span>
+						<input type="hidden" id="Doc_Req" name="Doc_Req">
+					</div>
+					
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<input type="submit" class="login100-form-btn btn-primary" name="ApplyBtn" value="Submit">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	 <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+	        		     <img style="margin-left: -20px;height:60px;" src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-10">
+                  <p>About LeaveSpot</p>
+                  <p> LeaveSpot is an online portal for applying and tracking leaves for students and tracking leave status and approving and rejecting leave for coordinators.</p>
+                </div>
+                <div class="footer-icons ml-3">
+                  <ul>
+                    <li>
+                      <a href="https://www.facebook.com/imankit.official/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/in/ankit-kumar-41a815175/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://www.instagram.com/imankit_official/" target="_blank"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/tAnkit5210" target="_blank"><i class="fa fa-twitter"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Contact</h4>
+                <div class="footer-contacts">
+                  <p><span>Contact No.:</span> +91 8292766864</p>
+                  <p><span>Email:</span> tankit5210@gmail.com</p>
+                  <p><span>Working Hours:</span> 10am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+         <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4></h4>
+                 <div class="copyright text-center">
+              <p>
+                &copy; <strong>LeaveSpot</strong> <script>document.write(new Date().getFullYear());</script> <br />
+              </p>
+            </div>
+            <div class="credits">
+              Designed with 💝 by <a href="https://tankit5210.wixsite.com/my-folio" target="_blank">Ankit Kumar</a>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'Apply_Leave/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'Apply_Leave/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'Apply_Leave/js/main.js' %}"></script>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	  <!-- Vendor JS Files -->
+		  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+		  <script src="{% static 'assets/vendor/appear/jquery.appear.js' %}"></script>
+		  <script src="{% static 'assets/vendor/knob/jquery.knob.js' %}"></script>
+		  <script src="{% static 'assets/vendor/parallax/parallax.js' %}"></script>
+		  <script src="{% static 'assets/vendor/wow/wow.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/nivo-slider/js/jquery.nivo.slider.js' %}"></script>
+		  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+		  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+
+		  <!-- Template Main JS File -->
+		  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>
+
+{% else %}
+<script>alert("You have been logged out.");
+  window.location.href="{% url 'StudentLogin' %}";
+</script>
+{% endif %}
